@@ -1,0 +1,31 @@
+version: 1
+rules:
+  - id: deny_dangerous_shell
+    match: run_shell
+    condition: "'rm -rf' in command or 'format' in command or 'del /f' in command"
+    action: deny
+    reason: 危险命令，直接拒绝
+
+  - id: deny_system_paths
+    match: "*"
+    condition: "'C:\\\\Windows' in path or 'C:\\\\Program Files' in path or '/etc' in path"
+    action: deny
+    reason: 禁止操作系统目录
+
+  - id: approve_high_risk
+    match: "*"
+    condition: "risk == 'high'"
+    action: require_approval
+    reason: 高风险操作，需人工审批
+
+  - id: force_approval_undoable
+    match: "*"
+    condition: "undo is None and risk != 'low'"
+    action: require_approval
+    reason: 不可撤销的中高风险操作，强制审批
+
+  - id: default_allow
+    match: "*"
+    condition: "True"
+    action: allow
+    reason: 默认放行

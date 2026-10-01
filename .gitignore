@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.sqlite
+*.db
+test_out/
+.venv/
+venv/
+*.out

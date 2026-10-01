@@ -1,0 +1,29 @@
+version: 1
+tools:
+  - name: read_file
+    desc: 读取本地文件
+    params: [path]
+    risk: low
+    undo: null
+    requires_approval: false
+
+  - name: write_file
+    desc: 写入本地文件
+    params: [path, content]
+    risk: medium
+    undo: delete_file
+    requires_approval: false
+
+  - name: delete_file
+    desc: 删除文件（仅作 write_file 的补偿动作）
+    params: [path]
+    risk: medium
+    undo: null
+    requires_approval: false
+
+  - name: run_shell
+    desc: 执行系统命令
+    params: [command]
+    risk: high
+    undo: null
+    requires_approval: true
