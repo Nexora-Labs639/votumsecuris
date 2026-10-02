@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class VotumSecurisApp extends StatelessWidget {
   }
 }
 
-enum LogLevel { info, warn, error }
+enum LogLevel { info, warn, error, critical }
 
 class LogEntry {
   final String ts;
@@ -73,6 +74,7 @@ class _AgentDashboardState extends State<AgentDashboard> {
     Agent(id: 'agent-B', task: '审核日志'),
   ];
   bool _busy = false;
+  final TextEditingController _pathCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -81,169 +83,164 @@ class _AgentDashboardState extends State<AgentDashboard> {
     _log('VotumSecuris（志钺）启动');
   }
 
-  void _detectProjectRoot() {
-    String dir = Directory.current.path;
-    for (int i = 0; i < 5; i++) {
-      if (dir.endsWith('votumsecuris')) break;
-      final parent = Directory(dir).parent.path;
-      if (parent == dir) break;
-      dir = parent;
-    }
-    setState(() => _projectRoot = dir);
-    _log('项目根目录: $dir');
-  }
-
-  void _log(String msg, {LogLevel level = LogLevel.info}) {
-    setState(() {
-      _logs.add(LogEntry(msg, level: level));
-      if (_logs.length > 500) _logs.removeAt(0);
-    });
-  }
-
-  Color _levelColor(LogLevel l) {
-    switch (l) {
-      case LogLevel.info:
-        return AppTheme.success;
-      case LogLevel.warn:
-        return AppTheme.warning;
-      case LogLevel.error:
-        return AppTheme.danger;
-    }
+  @override
+  void dispose() {
+    _pathCtrl.dispose();
+    super.dispose();
   }
   
-Future<void> _triggerAgent(String agentId) async {
-  if (_busy) {
-    _log('已有任务在执行，请等待', level: LogLevel.warn);
-    return;
+void _detectProjectRoot() {
+  String dir = Directory.current.path;
+  for (int i = 0; i < 5; i++) {
+    if (dir.endsWith('votumsecuris')) break;
+    final parent = Directory(dir).parent.path;
+    if (parent == dir) break;
+    dir = parent;
   }
-  setState(() => _busy = true);
+  setState(() => _projectRoot = dir);
+  _log('项目根目录: $dir');
+  _pathCtrl.text = '$dir/test_target.txt';
+}
 
-  final idx = _agents.indexWhere((a) => a.id == agentId);
-  if (idx < 0) return;
-
+void _log(String msg, {LogLevel level = LogLevel.info}) {
   setState(() {
-    _agents[idx].status = 'running';
-    _agents[idx].progress = 0;
+    _logs.add(LogEntry(msg, level: level));
+    if (_logs.length > 500) _logs.removeAt(0);
   });
-  _log('触发 $agentId 执行任务: ${_agents[idx].task}');
+}
 
-  try {
-    final result = await Process.run(
-      'python',
-      ['-m', 'executor.multi_agent'],
-      workingDirectory: _projectRoot,
-      runInShell: true,
-    );
+Color _levelColor(LogLevel l) {
+  switch (l) {
+    case LogLevel.info:
+      return AppTheme.success;
+    case LogLevel.warn:
+      return AppTheme.warning;
+    case LogLevel.error:
+      return AppTheme.danger;
+    case LogLevel.critical:
+      return AppTheme.danger;
+  }
+}
 
-    final lines = result.stdout.toString().split('\n');
-    for (final line in lines) {
-      if (line.trim().isEmpty) continue;
-      _log(line);
-      if (line.contains('第')) {
-        final m = RegExp(r'第 (\d+) 步').firstMatch(line);
-        if (m != null) {
-          final step = int.parse(m.group(1)!);
-          setState(() => _agents[idx].progress = step / 3);
-        }
+  Future<void> _requestDelete(String path, {bool userApproved = false}) async {
+    _log('请求删除: $path  (用户已审批=$userApproved)');
+
+    final script = '''
+import sys, json
+sys.path.insert(0, r"$_projectRoot")
+from executor.policy_bridge import request_delete
+result = request_delete("ui-agent", r"$path", user_approved=$userApproved)
+print(json.dumps(result, ensure_ascii=False))
+''';
+
+    try {
+      final result = await Process.run(
+        'python',
+        ['-c', script],
+        workingDirectory: _projectRoot,
+        runInShell: true,
+      );
+
+      final out = result.stdout.toString().trim();
+      if (out.isEmpty) {
+        _log('执行失败: ${result.stderr}', level: LogLevel.error);
+        return;
       }
-    }
 
-    if (result.stderr.toString().isNotEmpty) {
-      _log('[stderr] ${result.stderr}', level: LogLevel.warn);
-    }
+      final lastLine = out.split('\n').last;
+      final Map<String, dynamic> r = jsonDecode(lastLine);
+      final status = r['status'] as String;
+      final reason = r['reason'] as String? ?? '';
 
-    setState(() => _agents[idx].status = 'idle');
-    setState(() => _agents[idx].progress = 1.0);
-    _log('$agentId 执行完成', level: LogLevel.info);
-  } catch (e) {
-    setState(() => _agents[idx].status = 'error');
-    _log('$agentId 执行失败: $e', level: LogLevel.error);
-  } finally {
-    setState(() => _busy = false);
+      switch (status) {
+        case 'deleted':
+          _log('已删除: $path | 回收站: ${r['trash_path']}', level: LogLevel.info);
+          break;
+        case 'denied':
+          _log('拒绝删除: $path | 原因: $reason', level: LogLevel.critical);
+          break;
+        case 'need_approval':
+          _log('需要审批: $path | 原因: $reason', level: LogLevel.warn);
+          final ok = await _showApprovalDialog(path, reason, r['severity'] as String? ?? 'warn');
+          if (ok) {
+            await _requestDelete(path, userApproved: true);
+          } else {
+            _log('用户拒绝删除: $path', level: LogLevel.warn);
+          }
+          break;
+        case 'error':
+          _log('执行失败: $reason', level: LogLevel.error);
+          break;
+      }
+    } catch (e) {
+      _log('异常: $e', level: LogLevel.error);
+    }
   }
-}
 
-Future<void> _showApprovalDialog(
-    String toolName, Map<String, dynamic> params, String risk) async {
-  final result = await showDialog<bool>(
-    context: context,
-    barrierDismissible: false,
-    builder: (ctx) => AlertDialog(
-      backgroundColor: AppTheme.panel,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: const BorderSide(color: AppTheme.warning, width: 1),
-      ),
-      title: Row(
-        children: [
-          const Icon(Icons.warning_amber, color: AppTheme.warning),
-          const SizedBox(width: 8),
-          const Text('高风险操作 · 需要审批'),
-        ],
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _kv('工具', toolName),
-          _kv('风险', risk),
-          const SizedBox(height: 8),
-          const Text('参数：', style: TextStyle(color: AppTheme.textDim)),
-          const SizedBox(height: 4),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppTheme.bg,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: AppTheme.border),
-            ),
-            child: Text(
-              params.toString(),
-              style: const TextStyle(fontFamily: 'monospace', fontSize: 12),
-            ),
+  Future<bool> _showApprovalDialog(String path, String reason, String severity) async {
+    final isCritical = severity == 'critical';
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppTheme.panel,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+            color: isCritical ? AppTheme.danger : AppTheme.warning,
+            width: 2,
           ),
-          const SizedBox(height: 12),
-          const Text('该操作不可撤销，是否允许执行？',
-              style: TextStyle(color: AppTheme.warning)),
+        ),
+        title: Row(
+          children: [
+            Icon(isCritical ? Icons.dangerous : Icons.warning_amber,
+                color: isCritical ? AppTheme.danger : AppTheme.warning),
+            const SizedBox(width: 8),
+            Text(isCritical ? '危险操作 · 必须确认' : '高风险操作 · 需要审批'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('文件路径：', style: TextStyle(color: AppTheme.textDim)),
+            const SizedBox(height: 4),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppTheme.bg,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: AppTheme.border),
+              ),
+              child: Text(path,
+                  style: const TextStyle(fontFamily: 'monospace', fontSize: 12)),
+            ),
+            const SizedBox(height: 12),
+            const Text('原因：', style: TextStyle(color: AppTheme.textDim)),
+            const SizedBox(height: 4),
+            Text(reason, style: TextStyle(color: AppTheme.warning)),
+            const SizedBox(height: 12),
+            const Text('删除后可从回收站恢复。是否确认？',
+                style: TextStyle(color: AppTheme.textDim, fontSize: 12)),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('取消', style: TextStyle(color: AppTheme.danger)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.success),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('确认删除'),
+          ),
         ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('拒绝', style: TextStyle(color: AppTheme.danger)),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: AppTheme.success),
-          onPressed: () => Navigator.pop(ctx, true),
-          child: const Text('允许'),
-        ),
-      ],
-    ),
-  );
-
-  if (result == true) {
-    _log('审批通过: $toolName', level: LogLevel.info);
-  } else {
-    _log('审批拒绝: $toolName', level: LogLevel.warn);
+    );
+    return result == true;
   }
-}
-
-Widget _kv(String k, String v) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 2),
-    child: Row(
-      children: [
-        SizedBox(
-          width: 60,
-          child: Text(k, style: const TextStyle(color: AppTheme.textDim)),
-        ),
-        Text(v, style: const TextStyle(fontWeight: FontWeight.bold)),
-      ],
-    ),
-  );
-}
-
+  
 @override
 Widget build(BuildContext context) {
   return LayoutBuilder(
@@ -261,16 +258,7 @@ Widget build(BuildContext context) {
           backgroundColor: AppTheme.panel,
           actions: [
             IconButton(
-              icon: const Icon(Icons.warning_amber, color: AppTheme.warning),
-              tooltip: '模拟高风险操作（弹审批窗）',
-              onPressed: () => _showApprovalDialog(
-                'run_shell',
-                {'command': 'rm -rf /tmp/test'},
-                'high',
-              ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.delete_outline),
+              icon: const Icon(Icons.clear_all),
               tooltip: '清空日志',
               onPressed: () => setState(() => _logs.clear()),
             ),
@@ -279,14 +267,14 @@ Widget build(BuildContext context) {
         body: isWide
             ? Row(
                 children: [
-                  _agentPanel(width: 300),
+                  _leftPanel(width: 340),
                   const VerticalDivider(width: 1, color: AppTheme.border),
                   Expanded(child: _logPanel()),
                 ],
               )
             : Column(
                 children: [
-                  _agentPanel(height: 240),
+                  SizedBox(height: 300, child: _leftPanel()),
                   const Divider(height: 1, color: AppTheme.border),
                   Expanded(child: _logPanel()),
                 ],
@@ -296,90 +284,90 @@ Widget build(BuildContext context) {
   );
 }
 
-  Widget _agentPanel({double? width, double? height}) {
-    return Container(
-      width: width,
-      height: height,
-      color: AppTheme.panel,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(12),
-            child: Text('智能体列表',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+Widget _leftPanel({double? width}) {
+  return Container(
+    width: width,
+    color: AppTheme.panel,
+    child: ListView(
+      padding: const EdgeInsets.all(12),
+      children: [
+        const Text('删除测试',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _pathCtrl,
+          style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+          decoration: const InputDecoration(
+            labelText: '文件路径',
+            border: OutlineInputBorder(),
+            isDense: true,
           ),
-          const Divider(height: 1, color: AppTheme.border),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(12),
-              children: _agents.map(_agentCard).toList(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _agentCard(Agent a) {
-    final color = a.status == 'running'
-        ? AppTheme.success
-        : a.status == 'error'
-            ? AppTheme.danger
-            : AppTheme.textDim;
-    return Card(
-      color: AppTheme.card,
-      margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: const BorderSide(color: AppTheme.border),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+        const SizedBox(height: 8),
+        Row(
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-                ),
-                const SizedBox(width: 8),
-                Text(a.id,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold)),
-                const Spacer(),
-                Text(a.status,
-                    style: TextStyle(fontSize: 11, color: color)),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text('任务: ${a.task}',
-                style: const TextStyle(fontSize: 12, color: AppTheme.textDim)),
-            const SizedBox(height: 8),
-            LinearProgressIndicator(
-              value: a.progress,
-              backgroundColor: AppTheme.bg,
-              valueColor: AlwaysStoppedAnimation(color),
-              minHeight: 4,
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: a.status == 'running' || _busy
+            Expanded(
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.delete_outline, size: 16),
+                label: const Text('删除'),
+                onPressed: _busy
                     ? null
-                    : () => _triggerAgent(a.id),
-                child: Text(a.status == 'running' ? '执行中...' : '触发任务'),
+                    : () => _requestDelete(_pathCtrl.text),
               ),
             ),
           ],
         ),
+        const SizedBox(height: 12),
+        const Divider(color: AppTheme.border),
+        const SizedBox(height: 12),
+        const Text('智能体列表',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 12),
+        ..._agents.map(_agentCard),
+      ],
+    ),
+  );
+}
+
+Widget _agentCard(Agent a) {
+  final color = a.status == 'running'
+      ? AppTheme.success
+      : a.status == 'error'
+          ? AppTheme.danger
+          : AppTheme.textDim;
+  return Card(
+    color: AppTheme.card,
+    margin: const EdgeInsets.only(bottom: 12),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: const BorderSide(color: AppTheme.border),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 10, height: 10,
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+              ),
+              const SizedBox(width: 8),
+              Text(a.id,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+              const Spacer(),
+              Text(a.status, style: TextStyle(fontSize: 11, color: color)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text('任务: ${a.task}',
+              style: const TextStyle(fontSize: 12, color: AppTheme.textDim)),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _logPanel() {
     return Container(
