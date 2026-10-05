@@ -1,0 +1,12 @@
+ts,agent_uuid,agent_name,user_id,tool_name,action,severity,result,error
+2026-10-05T11:30:56.051900+00:00,9dee28a3-6a58-4b3d-a035-01db1f02450e,query-test-B,lisi,write_file,allow,info,,
+2026-10-05T11:30:56.046900+00:00,9dee28a3-6a58-4b3d-a035-01db1f02450e,query-test-B,lisi,run_shell,deny,critical,,
+2026-10-05T11:30:56.040798+00:00,8a95a846-d9ba-4245-bddc-5a24ad6571ab,query-test-A,zhangsan,delete_file,require_approval,critical,,
+2026-10-05T11:30:56.035799+00:00,8a95a846-d9ba-4245-bddc-5a24ad6571ab,query-test-A,zhangsan,read_file,allow,info,,
+2026-10-05T11:30:56.029325+00:00,8a95a846-d9ba-4245-bddc-5a24ad6571ab,query-test-A,zhangsan,read_file,allow,info,,
+2026-10-05T11:30:56.023325+00:00,8a95a846-d9ba-4245-bddc-5a24ad6571ab,query-test-A,zhangsan,read_file,allow,info,,
+2026-10-05T11:26:31.534488+00:00,701fac48-f5c0-4df6-acf2-e174bb438613,trace-test,zhangsan,delete_file,deleted,critical,ok,
+2026-10-05T08:37:31.318652+00:00,008be9e9-6cb4-4388-9627-6a9fc4e5d1ae,audit-test-B,lisi,delete_file,allow,info,deleted,
+2026-10-05T08:37:31.309844+00:00,008be9e9-6cb4-4388-9627-6a9fc4e5d1ae,audit-test-B,lisi,run_shell,deny,critical,,
+2026-10-05T08:37:31.293296+00:00,45b65082-9b4c-4ba6-847d-29a75985dc23,audit-test-A,zhangsan,delete_file,require_approval,warn,,
+2026-10-05T08:37:31.285979+00:00,45b65082-9b4c-4ba6-847d-29a75985dc23,audit-test-A,zhangsan,read_file,allow,info,ok,

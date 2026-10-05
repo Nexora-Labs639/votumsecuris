@@ -6,3 +6,7 @@ test_out/
 .venv/
 venv/
 *.out
+identity/.master_key
+.master_key
+*.key
+*.pem

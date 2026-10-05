@@ -1,0 +1,156 @@
+[
+  {
+    "ts": "2026-10-05T11:30:56.051900+00:00",
+    "agent_uuid": "9dee28a3-6a58-4b3d-a035-01db1f02450e",
+    "agent_name": "query-test-B",
+    "user_id": "lisi",
+    "tool_name": "write_file",
+    "action": "allow",
+    "severity": "info",
+    "params": {
+      "path": "D:/log.txt"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T11:30:56.046900+00:00",
+    "agent_uuid": "9dee28a3-6a58-4b3d-a035-01db1f02450e",
+    "agent_name": "query-test-B",
+    "user_id": "lisi",
+    "tool_name": "run_shell",
+    "action": "deny",
+    "severity": "critical",
+    "params": {
+      "command": "rm -rf /"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T11:30:56.040798+00:00",
+    "agent_uuid": "8a95a846-d9ba-4245-bddc-5a24ad6571ab",
+    "agent_name": "query-test-A",
+    "user_id": "zhangsan",
+    "tool_name": "delete_file",
+    "action": "require_approval",
+    "severity": "critical",
+    "params": {
+      "path": "D:/important.docx"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T11:30:56.035799+00:00",
+    "agent_uuid": "8a95a846-d9ba-4245-bddc-5a24ad6571ab",
+    "agent_name": "query-test-A",
+    "user_id": "zhangsan",
+    "tool_name": "read_file",
+    "action": "allow",
+    "severity": "info",
+    "params": {
+      "path": "D:/a2.txt"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T11:30:56.029325+00:00",
+    "agent_uuid": "8a95a846-d9ba-4245-bddc-5a24ad6571ab",
+    "agent_name": "query-test-A",
+    "user_id": "zhangsan",
+    "tool_name": "read_file",
+    "action": "allow",
+    "severity": "info",
+    "params": {
+      "path": "D:/a1.txt"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T11:30:56.023325+00:00",
+    "agent_uuid": "8a95a846-d9ba-4245-bddc-5a24ad6571ab",
+    "agent_name": "query-test-A",
+    "user_id": "zhangsan",
+    "tool_name": "read_file",
+    "action": "allow",
+    "severity": "info",
+    "params": {
+      "path": "D:/a0.txt"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T11:26:31.534488+00:00",
+    "agent_uuid": "701fac48-f5c0-4df6-acf2-e174bb438613",
+    "agent_name": "trace-test",
+    "user_id": "zhangsan",
+    "tool_name": "delete_file",
+    "action": "deleted",
+    "severity": "critical",
+    "params": {
+      "path": "D:/important.docx"
+    },
+    "result": "ok",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T08:37:31.318652+00:00",
+    "agent_uuid": "008be9e9-6cb4-4388-9627-6a9fc4e5d1ae",
+    "agent_name": "audit-test-B",
+    "user_id": "lisi",
+    "tool_name": "delete_file",
+    "action": "allow",
+    "severity": "info",
+    "params": {
+      "path": "D:/old.tmp"
+    },
+    "result": "deleted",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T08:37:31.309844+00:00",
+    "agent_uuid": "008be9e9-6cb4-4388-9627-6a9fc4e5d1ae",
+    "agent_name": "audit-test-B",
+    "user_id": "lisi",
+    "tool_name": "run_shell",
+    "action": "deny",
+    "severity": "critical",
+    "params": {
+      "command": "rm -rf /"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T08:37:31.293296+00:00",
+    "agent_uuid": "45b65082-9b4c-4ba6-847d-29a75985dc23",
+    "agent_name": "audit-test-A",
+    "user_id": "zhangsan",
+    "tool_name": "delete_file",
+    "action": "require_approval",
+    "severity": "warn",
+    "params": {
+      "path": "D:/doc.docx"
+    },
+    "result": "",
+    "error": ""
+  },
+  {
+    "ts": "2026-10-05T08:37:31.285979+00:00",
+    "agent_uuid": "45b65082-9b4c-4ba6-847d-29a75985dc23",
+    "agent_name": "audit-test-A",
+    "user_id": "zhangsan",
+    "tool_name": "read_file",
+    "action": "allow",
+    "severity": "info",
+    "params": {
+      "path": "D:/a.txt"
+    },
+    "result": "ok",
+    "error": ""
+  }
+]
