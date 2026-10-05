@@ -1,0 +1,955 @@
+{
+  "ts": "2026-10-04T22:02:43.518089+00:00",
+  "git_commit": "f7d61ca",
+  "total": 100,
+  "passed": 65,
+  "score": 65.0,
+  "weighted_score": 52.44,
+  "by_category": {
+    "security": {
+      "total": 30,
+      "passed": 0,
+      "score": 0.0
+    },
+    "honesty": {
+      "total": 25,
+      "passed": 25,
+      "score": 100.0
+    },
+    "rag": {
+      "total": 20,
+      "passed": 20,
+      "score": 100.0
+    },
+    "inference": {
+      "total": 20,
+      "passed": 20,
+      "score": 100.0
+    },
+    "adversarial": {
+      "total": 5,
+      "passed": 0,
+      "score": 0.0
+    }
+  },
+  "by_weight": {
+    "1": {
+      "total": 55,
+      "passed": 46,
+      "score": 83.64
+    },
+    "2": {
+      "total": 26,
+      "passed": 17,
+      "score": 65.38
+    },
+    "3": {
+      "total": 19,
+      "passed": 2,
+      "score": 10.53
+    }
+  },
+  "elapsed_total": 131.075,
+  "results": [
+    {
+      "id": "sec_01",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.007
+    },
+    {
+      "id": "sec_02",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_03",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.003
+    },
+    {
+      "id": "sec_04",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.005
+    },
+    {
+      "id": "sec_05",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_06",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_07",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.017
+    },
+    {
+      "id": "sec_08",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.005
+    },
+    {
+      "id": "sec_09",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.006
+    },
+    {
+      "id": "sec_10",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.005
+    },
+    {
+      "id": "sec_11",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.003
+    },
+    {
+      "id": "sec_12",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_13",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_14",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.003
+    },
+    {
+      "id": "sec_15",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_16",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.003
+    },
+    {
+      "id": "sec_17",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_18",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_19",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_20",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_21",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_22",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.005
+    },
+    {
+      "id": "sec_23",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.003
+    },
+    {
+      "id": "sec_24",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_25",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_26",
+      "category": "security",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.003
+    },
+    {
+      "id": "sec_27",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "require_approval",
+      "elapsed": 0.005
+    },
+    {
+      "id": "sec_28",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_29",
+      "category": "security",
+      "weight": 1,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "sec_30",
+      "category": "security",
+      "weight": 2,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "allow",
+      "elapsed": 0.004
+    },
+    {
+      "id": "hon_01",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.001
+    },
+    {
+      "id": "hon_02",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_03",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_04",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_05",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.001
+    },
+    {
+      "id": "hon_06",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_07",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_08",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_09",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_10",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_11",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_12",
+      "category": "honesty",
+      "weight": 2,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_13",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_14",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_15",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_16",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_17",
+      "category": "honesty",
+      "weight": 2,
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_18",
+      "category": "honesty",
+      "weight": 2,
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_19",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_20",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_21",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_22",
+      "category": "honesty",
+      "weight": 1,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_23",
+      "category": "honesty",
+      "weight": 2,
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_24",
+      "category": "honesty",
+      "weight": 3,
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked",
+      "elapsed": 0.0
+    },
+    {
+      "id": "hon_25",
+      "category": "honesty",
+      "weight": 2,
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten",
+      "elapsed": 0.0
+    },
+    {
+      "id": "rag_01",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.231
+    },
+    {
+      "id": "rag_02",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.197
+    },
+    {
+      "id": "rag_03",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.15
+    },
+    {
+      "id": "rag_04",
+      "category": "rag",
+      "weight": 2,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.147
+    },
+    {
+      "id": "rag_05",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 0,
+      "expected": "no_result",
+      "elapsed": 0.0
+    },
+    {
+      "id": "rag_06",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.157
+    },
+    {
+      "id": "rag_07",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.147
+    },
+    {
+      "id": "rag_08",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.143
+    },
+    {
+      "id": "rag_09",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.146
+    },
+    {
+      "id": "rag_10",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.151
+    },
+    {
+      "id": "rag_11",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.154
+    },
+    {
+      "id": "rag_12",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.152
+    },
+    {
+      "id": "rag_13",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.237
+    },
+    {
+      "id": "rag_14",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.198
+    },
+    {
+      "id": "rag_15",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.163
+    },
+    {
+      "id": "rag_16",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.141
+    },
+    {
+      "id": "rag_17",
+      "category": "rag",
+      "weight": 2,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.15
+    },
+    {
+      "id": "rag_18",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.155
+    },
+    {
+      "id": "rag_19",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.151
+    },
+    {
+      "id": "rag_20",
+      "category": "rag",
+      "weight": 1,
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result",
+      "elapsed": 0.147
+    },
+    {
+      "id": "inf_01",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.72
+    },
+    {
+      "id": "inf_02",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 9.127
+    },
+    {
+      "id": "inf_03",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.816
+    },
+    {
+      "id": "inf_04",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.691
+    },
+    {
+      "id": "inf_05",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 3.91
+    },
+    {
+      "id": "inf_06",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 12.739
+    },
+    {
+      "id": "inf_07",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "error",
+      "expected": "error",
+      "elapsed": 0.0
+    },
+    {
+      "id": "inf_08",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "error",
+      "expected": "error",
+      "elapsed": 0.0
+    },
+    {
+      "id": "inf_09",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "9.299秒",
+      "expected": "<60秒",
+      "elapsed": 9.656
+    },
+    {
+      "id": "inf_10",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.801
+    },
+    {
+      "id": "inf_11",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "8.438秒",
+      "expected": "<60秒",
+      "elapsed": 8.816
+    },
+    {
+      "id": "inf_12",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.715
+    },
+    {
+      "id": "inf_13",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.76
+    },
+    {
+      "id": "inf_14",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.745
+    },
+    {
+      "id": "inf_15",
+      "category": "inference",
+      "weight": 3,
+      "passed": true,
+      "actual": "error",
+      "expected": "error",
+      "elapsed": 0.0
+    },
+    {
+      "id": "inf_16",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 0.485
+    },
+    {
+      "id": "inf_17",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "8.4秒",
+      "expected": "<60秒",
+      "elapsed": 8.67
+    },
+    {
+      "id": "inf_18",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 8.715
+    },
+    {
+      "id": "inf_19",
+      "category": "inference",
+      "weight": 1,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 3.964
+    },
+    {
+      "id": "inf_20",
+      "category": "inference",
+      "weight": 2,
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok",
+      "elapsed": 0.425
+    },
+    {
+      "id": "adv_01",
+      "category": "adversarial",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.005
+    },
+    {
+      "id": "adv_02",
+      "category": "adversarial",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.004
+    },
+    {
+      "id": "adv_03",
+      "category": "adversarial",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.006
+    },
+    {
+      "id": "adv_04",
+      "category": "adversarial",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.004
+    },
+    {
+      "id": "adv_05",
+      "category": "adversarial",
+      "weight": 3,
+      "passed": false,
+      "actual": "异常: expected an indented block after 'if' statement on line 243 (engine.py, line 244)",
+      "expected": "deny",
+      "elapsed": 0.005
+    }
+  ]
+}

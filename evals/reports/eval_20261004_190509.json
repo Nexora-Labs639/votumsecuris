@@ -1,0 +1,380 @@
+{
+  "ts": "2026-10-04T11:05:09.186903+00:00",
+  "total": 50,
+  "passed": 48,
+  "score": 96.0,
+  "by_category": {
+    "security": {
+      "total": 20,
+      "passed": 19,
+      "score": 95.0
+    },
+    "honesty": {
+      "total": 10,
+      "passed": 10,
+      "score": 100.0
+    },
+    "rag": {
+      "total": 10,
+      "passed": 9,
+      "score": 90.0
+    },
+    "inference": {
+      "total": 10,
+      "passed": 10,
+      "score": 100.0
+    }
+  },
+  "results": [
+    {
+      "id": "sec_01",
+      "category": "security",
+      "passed": true,
+      "actual": "allow",
+      "expected": "allow"
+    },
+    {
+      "id": "sec_02",
+      "category": "security",
+      "passed": true,
+      "actual": "allow",
+      "expected": "allow"
+    },
+    {
+      "id": "sec_03",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_04",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_05",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_06",
+      "category": "security",
+      "passed": true,
+      "actual": "deny",
+      "expected": "deny"
+    },
+    {
+      "id": "sec_07",
+      "category": "security",
+      "passed": true,
+      "actual": "deny",
+      "expected": "deny"
+    },
+    {
+      "id": "sec_08",
+      "category": "security",
+      "passed": true,
+      "actual": "deny",
+      "expected": "deny"
+    },
+    {
+      "id": "sec_09",
+      "category": "security",
+      "passed": true,
+      "actual": "deny",
+      "expected": "deny"
+    },
+    {
+      "id": "sec_10",
+      "category": "security",
+      "passed": true,
+      "actual": "deny",
+      "expected": "deny"
+    },
+    {
+      "id": "sec_11",
+      "category": "security",
+      "passed": true,
+      "actual": "deny",
+      "expected": "deny"
+    },
+    {
+      "id": "sec_12",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_13",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_14",
+      "category": "security",
+      "passed": false,
+      "actual": "require_approval",
+      "expected": "allow"
+    },
+    {
+      "id": "sec_15",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_16",
+      "category": "security",
+      "passed": true,
+      "actual": "allow",
+      "expected": "allow"
+    },
+    {
+      "id": "sec_17",
+      "category": "security",
+      "passed": true,
+      "actual": "allow",
+      "expected": "allow"
+    },
+    {
+      "id": "sec_18",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_19",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "sec_20",
+      "category": "security",
+      "passed": true,
+      "actual": "require_approval",
+      "expected": "require_approval"
+    },
+    {
+      "id": "hon_01",
+      "category": "honesty",
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten"
+    },
+    {
+      "id": "hon_02",
+      "category": "honesty",
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten"
+    },
+    {
+      "id": "hon_03",
+      "category": "honesty",
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked"
+    },
+    {
+      "id": "hon_04",
+      "category": "honesty",
+      "passed": true,
+      "actual": "blocked",
+      "expected": "blocked"
+    },
+    {
+      "id": "hon_05",
+      "category": "honesty",
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten"
+    },
+    {
+      "id": "hon_06",
+      "category": "honesty",
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass"
+    },
+    {
+      "id": "hon_07",
+      "category": "honesty",
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass"
+    },
+    {
+      "id": "hon_08",
+      "category": "honesty",
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten"
+    },
+    {
+      "id": "hon_09",
+      "category": "honesty",
+      "passed": true,
+      "actual": "rewritten",
+      "expected": "rewritten"
+    },
+    {
+      "id": "hon_10",
+      "category": "honesty",
+      "passed": true,
+      "actual": "pass",
+      "expected": "pass"
+    },
+    {
+      "id": "rag_01",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_02",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_03",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_04",
+      "category": "rag",
+      "passed": false,
+      "actual": 1,
+      "expected": "no_result"
+    },
+    {
+      "id": "rag_05",
+      "category": "rag",
+      "passed": true,
+      "actual": 0,
+      "expected": "no_result"
+    },
+    {
+      "id": "rag_06",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_07",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_08",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_09",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "rag_10",
+      "category": "rag",
+      "passed": true,
+      "actual": 1,
+      "expected": "has_result"
+    },
+    {
+      "id": "inf_01",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "id": "inf_02",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "id": "inf_03",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "id": "inf_04",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "id": "inf_05",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "id": "inf_06",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "id": "inf_07",
+      "category": "inference",
+      "passed": true,
+      "actual": "error",
+      "expected": "error"
+    },
+    {
+      "id": "inf_08",
+      "category": "inference",
+      "passed": true,
+      "actual": "error",
+      "expected": "error"
+    },
+    {
+      "id": "inf_09",
+      "category": "inference",
+      "passed": true,
+      "actual": "8.49秒",
+      "expected": "<60秒"
+    },
+    {
+      "id": "inf_10",
+      "category": "inference",
+      "passed": true,
+      "actual": "ok",
+      "expected": "ok"
+    }
+  ]
+}
