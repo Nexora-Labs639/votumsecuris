@@ -1,0 +1,39 @@
+{
+  "policy_engine": {
+    "iterations": 100,
+    "errors": 0,
+    "avg_ms": 0.079,
+    "min_ms": 0.068,
+    "max_ms": 0.309,
+    "median_ms": 0.07,
+    "stdev_ms": 0.029
+  },
+  "honesty": {
+    "iterations": 100,
+    "errors": 0,
+    "avg_ms": 0.004,
+    "min_ms": 0.003,
+    "max_ms": 0.005,
+    "median_ms": 0.004,
+    "stdev_ms": 0.0
+  },
+  "rag_search": {
+    "iterations": 5,
+    "errors": 0,
+    "avg_ms": 140.236,
+    "min_ms": 122.577,
+    "max_ms": 163.247,
+    "median_ms": 134.018,
+    "stdev_ms": 17.513
+  },
+  "llm_inference": {
+    "iterations": 2,
+    "errors": 0,
+    "avg_ms": 2827.958,
+    "min_ms": 708.452,
+    "max_ms": 4947.465,
+    "median_ms": 2827.958,
+    "stdev_ms": 2997.435
+  },
+  "ts": "2026-10-06T04:48:41"
+}
