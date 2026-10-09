@@ -20,6 +20,8 @@ MSG_TASK_UPDATE = "task_update"     # 任务状态更新
 MSG_APPROVAL_REQUEST = "approval_request"  # 审批请求
 MSG_PROGRESS = "progress"           # 进度汇报
 MSG_LOG = "log"                     # 日志
+MSG_CHAT = "chat"                    # 聊天式发指令
+MSG_CHAT_REPLY = "chat_reply"        # 聊天回复
 MSG_PONG = "pong"                   # 心跳响应
 MSG_ERROR = "error"                 # 错误
 
