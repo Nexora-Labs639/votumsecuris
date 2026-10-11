@@ -83,17 +83,19 @@ class SyncHandler(BaseHTTPRequestHandler):
 
 
 def start_server():
+    """启动同步服务（默认只监听本机）"""
     ip = get_local_ip()
-    server = HTTPServer(("0.0.0.0", PORT), SyncHandler)
-    print(f"[同步服务] 本机 IP: {ip}  监听端口: {PORT}")
-    print(f"[同步服务] 其他设备访问: http://{ip}:{PORT}/ping")
+    bind_addr = "127.0.0.1"   # 只监听本机
+    server = HTTPServer((bind_addr, PORT), SyncHandler)
+    print(f"[同步服务] 监听: {bind_addr}:{PORT}")
+    print(f"[同步服务] 本机 IP: {ip}")
+    print(f"[同步服务] 仅本机可访问（局域网被禁用）")
     print(f"[同步服务] 按 Ctrl+C 停止")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         print("\n[同步服务] 已停止")
         server.shutdown()
-
 
 if __name__ == "__main__":
     start_server()
