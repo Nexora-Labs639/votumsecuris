@@ -27,3 +27,46 @@ tools:
     risk: high
     undo: null
     requires_approval: true
+    
+     # ========== Windows-MCP 工具 ========== 
+  - name: windows:Click
+    desc: 点击屏幕坐标
+    params: [x, y]
+    risk: high
+    undo: null
+    requires_approval: true
+
+  - name: windows:Type
+    desc: 输入文本
+    params: [text]
+    risk: high
+    undo: null
+    requires_approval: true
+
+  - name: windows:App
+    desc: 启动应用
+    params: [name]
+    risk: high
+    undo: null
+    requires_approval: true
+
+  - name: windows:Wait
+    desc: 暂停
+    params: [duration]
+    risk: low
+    undo: null
+    requires_approval: false
+
+  - name: windows:Screenshot
+    desc: 截图
+    params: []
+    risk: low
+    undo: null
+    requires_approval: false
+
+  - name: windows:PowerShell
+    desc: PowerShell 命令（禁止）
+    params: [command]
+    risk: critical
+    undo: null
+    requires_approval: true
